@@ -1,24 +1,26 @@
 import React, { Component } from 'react';
-import Idea from './idea';
+import shortid from 'shortid';
+import Idea from './Idea';
 
 class IdeaBoard extends Component {
   constructor(props) {
     super(props);
     this.state = {
       ideas: [
-        {title: 'First Idea', desc: "This is my first idea", lastModified: new Date()},
-        {title: 'Second Idea', desc: "This is my Second idea", lastModified: new Date()},
-        {title: 'Second Idea', desc: "This is my Second idea", lastModified: new Date()},
-        {title: 'Second Idea', desc: "This is my Second idea", lastModified: new Date()},
-        {title: 'Second Idea', desc: "This is my Second idea", lastModified: new Date()}
+        {id: 1, title: 'First Idea', desc: "This is my first idea", lastModified: new Date()},
       ]
     }
     this.displayIdeas = this.displayIdeas.bind(this);
   }
 
+  addNewIdea = () => {
+    const newIdea = {id: shortid.generate(),title: '', desc: '', lastModified: new Date()};
+      this.setState({ideas: [newIdea, ...this.state.ideas]})
+  };
+
   displayIdeas() {
-    return this.state.ideas.map((idea) => {
-      return (<Idea idea={idea}/>)
+    return this.state.ideas.map((idea, key) => {
+      return (<Idea key={key} idea={idea}/>)
     })
   }
 
@@ -26,10 +28,13 @@ class IdeaBoard extends Component {
     return (
       <div>
         <div className="row">
-          <button type="button" className="btn btn-primary newIdeaButton">Add New Idea</button>
+          <button type="button" className="btn btn-primary newIdeaButton" onClick={this.addNewIdea} >Add New Idea</button>
         </div>
         <div className="row">
-          {this.displayIdeas()}
+          {this.state.ideas.map((idea) => {
+            return (<Idea key={idea.id} idea={idea} />)
+            })
+          }
         </div>
       </div>
 

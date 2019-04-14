@@ -15,7 +15,7 @@
 }
 
 .newIdeaButton {
-  margin: 25px;
+  margin: 0px 0px 25px 15px;
 }
 
 .deleteButton {
@@ -25,6 +25,16 @@
   font-size: 18px;
   cursor: pointer;
   color: cornflowerblue;
+}
+
+.input {
+  border: 0;
+  background: none;
+  outline: none;
+  margin-top:10px;
+  width: 250px;
+  font-size: 11px;
+  resize: none;
 }
 
 .card-body:hover .deleteButton {
