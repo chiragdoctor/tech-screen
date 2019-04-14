@@ -11,6 +11,7 @@ class IdeaBoard extends Component {
       ]
     }
     this.displayIdeas = this.displayIdeas.bind(this);
+    this.updateIdea = this.updateIdea.bind(this);
   }
 
   addNewIdea = () => {
@@ -24,15 +25,27 @@ class IdeaBoard extends Component {
     })
   }
 
+  updateIdea(updatedIdea) {
+    const ideas = this.state.ideas.map((i) => {
+      if(i.id === updatedIdea.id) {
+        i.title = updatedIdea.title;
+        i.desc = updatedIdea.desc;
+        i.lastModified = updatedIdea.lastModified;
+      }
+      return i;
+    });
+    this.setState({ideas});
+  }
+
   render(){
     return (
       <div>
         <div className="row">
-          <button type="button" className="btn btn-primary newIdeaButton" onClick={this.addNewIdea} >Add New Idea</button>
+          <button type="button" className="btn btn-primary newIdeaButton" onClick={this.addNewIdea}> Add New Idea </button>
         </div>
         <div className="row">
           {this.state.ideas.map((idea) => {
-            return (<Idea key={idea.id} idea={idea} />)
+            return (<Idea key={idea.id} idea={idea} updateIdea={this.updateIdea} />)
             })
           }
         </div>
