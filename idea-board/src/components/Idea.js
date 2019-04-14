@@ -11,6 +11,8 @@ class Idea extends Component {
     };
 
     this.handleInput = this.handleInput.bind(this);
+    this.handleBlur = this.handleBlur.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   handleBlur = () => {
@@ -22,6 +24,10 @@ class Idea extends Component {
     this.setState({[e.target.name]: e.target.value})
   }
 
+  handleDelete() {
+    this.props.deleteIdea(this.state.id);
+  }
+
   render() {
     return (
       <div>
@@ -30,6 +36,7 @@ class Idea extends Component {
             <div className="tile col-md-4">
               <div className="card" style={{width: 18+'rem'}}>
                 <div className="card-body">
+                  <span className="deleteButton" onClick={this.handleDelete}>x</span>
                   <input type="hidden" name="id" value={this.state.id}/>
                   <input className='card-title input' type="text" name="title" placeholder='Title'
                          value={this.state.title} onChange={this.handleInput} />

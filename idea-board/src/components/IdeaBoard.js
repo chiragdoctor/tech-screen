@@ -16,6 +16,7 @@ class IdeaBoard extends Component {
     }
     this.displayIdeas = this.displayIdeas.bind(this);
     this.updateIdea = this.updateIdea.bind(this);
+    this.deleteIdea = this.deleteIdea.bind(this);
   }
 
   addNewIdea = () => {
@@ -41,6 +42,14 @@ class IdeaBoard extends Component {
     this.setState({ideas});
   }
 
+  deleteIdea(id) {
+    const ideas = this.state.ideas.filter((idea) => {
+      return idea.id !== id
+    });
+
+    this.setState({ideas});
+  }
+
   render(){
     return (
       <div>
@@ -49,7 +58,7 @@ class IdeaBoard extends Component {
         </div>
         <div className="row">
           {this.state.ideas.map((idea) => {
-            return (<Idea key={idea.id} idea={idea} updateIdea={this.updateIdea} />)
+            return (<Idea key={idea.id} idea={idea} updateIdea={this.updateIdea} deleteIdea={this.deleteIdea}/>)
             })
           }
         </div>
