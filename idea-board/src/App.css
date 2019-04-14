@@ -37,6 +37,11 @@
   resize: none;
 }
 
+.lastModified {
+  float: right;
+  font-size: 11px;
+}
+
 .card-body:hover .deleteButton {
   visibility: visible;
 }

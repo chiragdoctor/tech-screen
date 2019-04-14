@@ -6,7 +6,8 @@ class Idea extends Component {
     this.state = {
       id: this.props.idea.id,
       title: this.props.idea.title,
-      desc: this.props.idea.desc
+      desc: this.props.idea.desc,
+      lastModified: this.props.idea.lastModified
     };
 
     this.handleInput = this.handleInput.bind(this);
@@ -33,7 +34,8 @@ class Idea extends Component {
                   <input className='card-title input' type="text" name="title" placeholder='Title'
                          value={this.state.title} onChange={this.handleInput} />
                   <textarea className='card-text input' rows="3" name="desc" placeholder='Describe your thoughts'
-                            value={this.state.desc} onChange={this.handleInput} />
+                            value={this.state.desc} onChange={this.handleInput} maxLength="140"/>
+                  <p className='lastModified'>{this.state.lastModified}</p>
                 </div>
               </div>
             </div>
