@@ -7,3 +7,26 @@
   height: 150px;
   padding: 20px;
 }
+
+.tile {
+  margin-bottom: 10px;
+  float: left;
+  text-align: left;
+}
+
+.newIdeaButton {
+  margin: 25px;
+}
+
+.deleteButton {
+  visibility: hidden;
+  float: right;
+  margin: 5px;
+  font-size: 18px;
+  cursor: pointer;
+  color: cornflowerblue;
+}
+
+.card-body:hover .deleteButton {
+  visibility: visible;
+}

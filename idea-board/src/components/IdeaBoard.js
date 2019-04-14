@@ -6,7 +6,11 @@ class IdeaBoard extends Component {
     super(props);
     this.state = {
       ideas: [
-        {title: 'FirstIdea', desc: "this is my first idea"}
+        {title: 'First Idea', desc: "This is my first idea", lastModified: new Date()},
+        {title: 'Second Idea', desc: "This is my Second idea", lastModified: new Date()},
+        {title: 'Second Idea', desc: "This is my Second idea", lastModified: new Date()},
+        {title: 'Second Idea', desc: "This is my Second idea", lastModified: new Date()},
+        {title: 'Second Idea', desc: "This is my Second idea", lastModified: new Date()}
       ]
     }
     this.displayIdeas = this.displayIdeas.bind(this);
@@ -21,10 +25,12 @@ class IdeaBoard extends Component {
   render(){
     return (
       <div>
-        <div>
-          <button type="button" className="btn btn-primary">Add New Idea</button>
+        <div className="row">
+          <button type="button" className="btn btn-primary newIdeaButton">Add New Idea</button>
         </div>
-        {this.displayIdeas()}
+        <div className="row">
+          {this.displayIdeas()}
+        </div>
       </div>
 
     )
