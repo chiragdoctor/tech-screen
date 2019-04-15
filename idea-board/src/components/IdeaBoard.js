@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import shortid from 'shortid';
 import moment from 'moment';
+import { toast } from 'react-toastify';
+
 import {DATE_FORMAT} from "../constants";
 import Idea from './Idea';
+import Notification from './Notification';
 
 class IdeaBoard extends Component {
   constructor(props) {
@@ -17,6 +20,9 @@ class IdeaBoard extends Component {
     this.deleteIdea = this.deleteIdea.bind(this);
     this.sortIdeas = this.sortIdeas.bind(this);
   }
+
+
+  notifyUpdateTile = () => toast("Idea has been updated !");
 
   formatDate(date) {
     return moment(date).format(DATE_FORMAT);
@@ -43,7 +49,7 @@ class IdeaBoard extends Component {
       }
       return i;
     });
-    this.setState({ideas});
+    this.setState({ideas}, () => this.notifyUpdateTile());
   }
 
   deleteIdea(id) {
@@ -55,7 +61,6 @@ class IdeaBoard extends Component {
   }
 
   sortIdeas(e) {
-    console.log(e.target.value);
     const {value} = e.target;
     if(!value || value === 'sort') {
       return;
@@ -70,13 +75,15 @@ class IdeaBoard extends Component {
   render(){
     return (
       <div>
+        <Notification />
         <div className="row">
           <div className="col-md-2">
             <button type="button" className="btn btn-primary newIdeaButton" onClick={this.addNewIdea}> Add New Idea </button>
           </div>
-          <div className="col-md-2"></div>
-          <div className="col-md-2"></div>
-          <div className="col-md-2"></div>
+          <div className="col-md-2" />
+          <div className="col-md-2" />
+          <div className="col-md-2" />
+          <div className="col-md-2" />
           <div className="col-md-2">
             <select className="form-control" id="sortBySelect1" onChange={this.sortIdeas}>
               <option value="sort">Sort</option>
@@ -87,7 +94,7 @@ class IdeaBoard extends Component {
         </div>
         <div className="row">
           {this.state.ideas.map((idea) => {
-            return (<Idea key={idea.id} idea={idea} updateIdea={this.updateIdea} deleteIdea={this.deleteIdea}/>)
+            return (<Idea key={idea.id} idea={idea} updateIdea={this.updateIdea} deleteIdea={this.deleteIdea} />)
           })
           }
         </div>

@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {toast} from 'react-toastify';
 
 class Idea extends Component {
   constructor(props) {
@@ -22,7 +23,7 @@ class Idea extends Component {
 
   handleBlur = () => {
     const idea = {id:this.state.id, title: this.state.title, desc: this.state.desc, lastModified: new Date()};
-    this.props.updateIdea(idea)
+    this.props.updateIdea(idea);
   }
 
   handleInput(e) {
