@@ -11,7 +11,7 @@ class IdeaBoard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      ideas: [{id: 1, title: 'First Idea', desc: "This is my first idea", lastModified: this.formatDate(new Date())}],
+      ideas: [],
       newIdeaId: 1
     };
 
@@ -21,6 +21,15 @@ class IdeaBoard extends Component {
     this.sortIdeas = this.sortIdeas.bind(this);
   }
 
+  componentWillMount() {
+    localStorage.getItem("ideas") && this.setState({
+      ideas: JSON.parse(localStorage.getItem("ideas"))
+    })
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    localStorage.setItem('ideas', JSON.stringify(nextState.ideas));
+  }
 
   notifyUpdateTile = () => toast("Idea has been updated !");
 

@@ -3,10 +3,6 @@ import { ToastContainer } from 'react-toastify';
 
 
 class Notification extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return(
       <div>
