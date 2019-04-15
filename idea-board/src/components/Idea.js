@@ -6,12 +6,14 @@ class Idea extends Component {
     this.state = {
       id: this.props.idea.id,
       title: this.props.idea.title,
-      desc: this.props.idea.desc
+      desc: this.props.idea.desc,
+      alphabetsRem: 0
     };
 
     this.handleInput = this.handleInput.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.displayCountdown = this.displayCountdown.bind(this);
   }
 
   componentDidMount(){
@@ -24,11 +26,16 @@ class Idea extends Component {
   }
 
   handleInput(e) {
-    this.setState({[e.target.name]: e.target.value})
+    const {name, value} = e.target;
+    this.setState({[name]: value})
   }
 
   handleDelete() {
     this.props.deleteIdea(this.state.id);
+  }
+
+  displayCountdown() {
+    return this.state.desc.length > 0 ? 140 - this.state.desc.length : 140;
   }
 
   render() {
@@ -45,8 +52,8 @@ class Idea extends Component {
                          value={this.state.title} onChange={this.handleInput} ref={input => this.title = input}
                           />
                   <textarea className='card-text input' rows="3" name="desc" placeholder='Describe your thoughts'
-                            value={this.state.desc} onChange={this.handleInput} maxLength="140"
-                            onClick={this.handleClick}/>
+                            value={this.state.desc} onChange={this.handleInput} maxLength="140" />
+                  <p className='countdown'>({this.displayCountdown()}/140)</p>
                   <p className='lastModified'>{this.props.idea.lastModified}</p>
                 </div>
               </div>

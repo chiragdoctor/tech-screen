@@ -49,6 +49,11 @@
   font-size: 11px;
 }
 
+.countdown {
+  float: left;
+  font-size: 11px;
+}
+
 .card-body:hover .deleteButton {
   visibility: visible;
 }
