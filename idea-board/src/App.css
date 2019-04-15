@@ -37,6 +37,11 @@
   resize: none;
 }
 
+.card-title.input {
+  font-size: 18px;
+  font-weight: bold;
+}
+
 .lastModified {
   float: right;
   font-size: 11px;

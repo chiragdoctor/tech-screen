@@ -1,27 +1,30 @@
 import React, { Component } from 'react';
 import shortid from 'shortid';
 import moment from 'moment';
-
+import {DATE_FORMAT} from "../constants";
 import Idea from './Idea';
 
 class IdeaBoard extends Component {
   constructor(props) {
     super(props);
-    this.DATE_FORMAT = 'DD/MM/YYYY HH:mm';
-
     this.state = {
-      ideas: [
-        {id: 1, title: 'First Idea', desc: "This is my first idea", lastModified: moment(new Date()).format(this.DATE_FORMAT)},
-      ]
-    }
+      ideas: [{id: 1, title: 'First Idea', desc: "This is my first idea", lastModified: this.formatDate(new Date())}],
+      newIdeaId: 1
+    };
+
     this.displayIdeas = this.displayIdeas.bind(this);
     this.updateIdea = this.updateIdea.bind(this);
     this.deleteIdea = this.deleteIdea.bind(this);
   }
 
+  formatDate(date) {
+    return moment(date).format(DATE_FORMAT);
+  }
+
   addNewIdea = () => {
-    const newIdea = {id: shortid.generate(),title: '', desc: '', lastModified: moment(new Date()).format(this.DATE_FORMAT)};
-      this.setState({ideas: [newIdea, ...this.state.ideas]})
+    const id = shortid.generate();
+    const newIdea = {id, title: '', desc: '', lastModified: this.formatDate(new Date())};
+      this.setState({ideas: [newIdea, ...this.state.ideas], newIdeaId: id});
   };
 
   displayIdeas() {
@@ -35,7 +38,7 @@ class IdeaBoard extends Component {
       if(i.id === updatedIdea.id) {
         i.title = updatedIdea.title;
         i.desc = updatedIdea.desc;
-        i.lastModified = moment(updatedIdea.lastModified).format(this.DATE_FORMAT);
+        i.lastModified = this.formatDate(updatedIdea.lastModified);
       }
       return i;
     });

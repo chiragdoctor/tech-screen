@@ -6,13 +6,16 @@ class Idea extends Component {
     this.state = {
       id: this.props.idea.id,
       title: this.props.idea.title,
-      desc: this.props.idea.desc,
-      lastModified: this.props.idea.lastModified
+      desc: this.props.idea.desc
     };
 
     this.handleInput = this.handleInput.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+  }
+
+  componentDidMount(){
+    this.title.focus();
   }
 
   handleBlur = () => {
@@ -39,10 +42,12 @@ class Idea extends Component {
                   <span className="deleteButton" onClick={this.handleDelete}>x</span>
                   <input type="hidden" name="id" value={this.state.id}/>
                   <input className='card-title input' type="text" name="title" placeholder='Title'
-                         value={this.state.title} onChange={this.handleInput} />
+                         value={this.state.title} onChange={this.handleInput} ref={input => this.title = input}
+                          />
                   <textarea className='card-text input' rows="3" name="desc" placeholder='Describe your thoughts'
-                            value={this.state.desc} onChange={this.handleInput} maxLength="140"/>
-                  <p className='lastModified'>{this.state.lastModified}</p>
+                            value={this.state.desc} onChange={this.handleInput} maxLength="140"
+                            onClick={this.handleClick}/>
+                  <p className='lastModified'>{this.props.idea.lastModified}</p>
                 </div>
               </div>
             </div>
