@@ -6,6 +6,8 @@
   text-align: center;
   height: 150px;
   padding: 20px;
+  text-shadow: 4px 2px #454500;
+  font-family: "American Typewriter";
 }
 
 .tile {

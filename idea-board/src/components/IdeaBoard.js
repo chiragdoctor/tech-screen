@@ -15,6 +15,7 @@ class IdeaBoard extends Component {
     this.displayIdeas = this.displayIdeas.bind(this);
     this.updateIdea = this.updateIdea.bind(this);
     this.deleteIdea = this.deleteIdea.bind(this);
+    this.sortIdeas = this.sortIdeas.bind(this);
   }
 
   formatDate(date) {
@@ -53,16 +54,41 @@ class IdeaBoard extends Component {
     this.setState({ideas});
   }
 
+  sortIdeas(e) {
+    console.log(e.target.value);
+    const {value} = e.target;
+    if(!value || value === 'sort') {
+      return;
+    }
+    let ideas = this.state.ideas.sort((idea, nextIdea) => idea[value] < nextIdea[value] ? -1 : idea[value] > nextIdea[value] ? 1 : 0);
+    if(value === 'lastModified') {
+      ideas = ideas.reverse();
+    }
+    this.setState({ideas});
+  }
+
   render(){
     return (
       <div>
         <div className="row">
-          <button type="button" className="btn btn-primary newIdeaButton" onClick={this.addNewIdea}> Add New Idea </button>
+          <div className="col-md-2">
+            <button type="button" className="btn btn-primary newIdeaButton" onClick={this.addNewIdea}> Add New Idea </button>
+          </div>
+          <div className="col-md-2"></div>
+          <div className="col-md-2"></div>
+          <div className="col-md-2"></div>
+          <div className="col-md-2">
+            <select className="form-control" id="sortBySelect1" onChange={this.sortIdeas}>
+              <option value="sort">Sort</option>
+              <option value="lastModified">By Creation/Modification Date</option>
+              <option value="title">By Title</option>
+            </select>
+          </div>
         </div>
         <div className="row">
           {this.state.ideas.map((idea) => {
             return (<Idea key={idea.id} idea={idea} updateIdea={this.updateIdea} deleteIdea={this.deleteIdea}/>)
-            })
+          })
           }
         </div>
       </div>
