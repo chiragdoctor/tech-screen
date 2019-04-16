@@ -89,14 +89,11 @@ class IdeaBoard extends Component {
           <div className="col-md-2">
             <button type="button" className="btn btn-primary newIdeaButton" onClick={this.addNewIdea}> Add New Idea </button>
           </div>
-          <div className="col-md-2" />
-          <div className="col-md-2" />
-          <div className="col-md-2" />
-          <div className="col-md-2" />
+          <div className="col-md-8" />
           <div className="col-md-2">
-            <select className="form-control" id="sortBySelect1" onChange={this.sortIdeas}>
+            <select className="form-control" id="sortBySelect" onChange={this.sortIdeas}>
               <option value="sort">Sort</option>
-              <option value="lastModified">By Creation/Modification Date</option>
+              <option value="lastModified">By Modified Time</option>
               <option value="title">By Title</option>
             </select>
           </div>
